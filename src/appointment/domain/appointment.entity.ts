@@ -1,3 +1,5 @@
+import { AppointmentAlreadyCanceledError } from './errors/appointment-already-canceled.error';
+import { CannotCancelPastAppointmentError } from './errors/cannot-cancel-past-appointment.error';
 import { AppointmentStatus } from './appointment-status.enum';
 
 export class Appointment {
@@ -23,11 +25,11 @@ export class Appointment {
 
   cancel(now: Date = new Date()) {
     if (this.status === AppointmentStatus.CANCELED) {
-      throw new Error('Appointment already canceled');
+      throw new AppointmentAlreadyCanceledError(this.id);
     }
 
     if (this.scheduledAt.getTime() < now.getTime()) {
-      throw new Error('Cannot cancel a past appointment');
+      throw new CannotCancelPastAppointmentError(this.id);
     }
 
     this.status = AppointmentStatus.CANCELED;

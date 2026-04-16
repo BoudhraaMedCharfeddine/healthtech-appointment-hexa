@@ -1,4 +1,5 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
+import { AppointmentNotFoundError } from '../errors/appointment-not-found.error';
 import {
   APPOINTMENT_REPOSITORY,
   AppointmentRepository,
@@ -21,7 +22,7 @@ export class CancelAppointmentUseCase {
     );
 
     if (!appointment) {
-      throw new NotFoundException('Appointment not found');
+      throw new AppointmentNotFoundError(command.appointmentId);
     }
 
     appointment.cancel();
