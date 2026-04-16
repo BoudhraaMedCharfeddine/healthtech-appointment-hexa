@@ -1,4 +1,8 @@
-import { Body, Controller, Delete, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Inject, Param, Post } from '@nestjs/common';
+import {
+  BOOK_APPOINTMENT_USE_CASE,
+  CANCEL_APPOINTMENT_USE_CASE,
+} from '../../application/use-cases/use-case.tokens';
 import { BookAppointmentUseCase } from '../../application/use-cases/book-appointment.use-case';
 import { CancelAppointmentUseCase } from '../../application/use-cases/cancel-appointment.use-case';
 import { BookAppointmentDto } from './dto/book-appointment.dto';
@@ -6,7 +10,9 @@ import { BookAppointmentDto } from './dto/book-appointment.dto';
 @Controller('appointments')
 export class AppointmentController {
   constructor(
+    @Inject(BOOK_APPOINTMENT_USE_CASE)
     private readonly bookAppointmentUseCase: BookAppointmentUseCase,
+    @Inject(CANCEL_APPOINTMENT_USE_CASE)
     private readonly cancelAppointmentUseCase: CancelAppointmentUseCase,
   ) {}
 

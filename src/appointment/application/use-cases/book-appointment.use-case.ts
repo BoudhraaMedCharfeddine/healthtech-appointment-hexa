@@ -1,23 +1,17 @@
-import { Inject, Injectable } from '@nestjs/common';
 import { randomUUID } from 'crypto';
 import { Appointment } from '../../domain/appointment.entity';
 import { PastAppointmentBookingError } from '../errors/past-appointment-booking.error';
 import { SlotAlreadyBookedError } from '../errors/slot-already-booked.error';
-import {
-  APPOINTMENT_REPOSITORY,
-  AppointmentRepository,
-} from '../ports/appointment.repository';
+import { AppointmentRepository } from '../ports/appointment.repository';
 
-type BookAppointmentCommand = {
+export type BookAppointmentCommand = {
   patientId: string;
   practitionerId: string;
   scheduledAt: Date;
 };
 
-@Injectable()
 export class BookAppointmentUseCase {
   constructor(
-    @Inject(APPOINTMENT_REPOSITORY)
     private readonly appointmentRepository: AppointmentRepository,
   ) {}
 

@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppointmentModule } from './appointment/appointment.module';
 import { AppointmentOrmEntity } from './appointment/infrastructure/persistence/typeorm/appointment.orm-entity';
+import { AppointmentModule } from './appointment/appointment.module';
+
 
 @Module({
   imports: [

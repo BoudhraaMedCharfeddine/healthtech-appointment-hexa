@@ -1,18 +1,12 @@
-import { Inject, Injectable } from '@nestjs/common';
 import { AppointmentNotFoundError } from '../errors/appointment-not-found.error';
-import {
-  APPOINTMENT_REPOSITORY,
-  AppointmentRepository,
-} from '../ports/appointment.repository';
+import { AppointmentRepository } from '../ports/appointment.repository';
 
-type CancelAppointmentCommand = {
+export type CancelAppointmentCommand = {
   appointmentId: string;
 };
 
-@Injectable()
 export class CancelAppointmentUseCase {
   constructor(
-    @Inject(APPOINTMENT_REPOSITORY)
     private readonly appointmentRepository: AppointmentRepository,
   ) {}
 
